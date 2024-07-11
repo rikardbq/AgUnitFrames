@@ -225,7 +225,7 @@ function plugin.HealthBarColor(self)
 			colorTable = colorTables.yellow
         end
 
-        plugin.SetBarColor(self, color)
+        plugin.SetBarColor(self, colorTable)
 	elseif not UnitIsFriend(self.unit, "player") and db.TargetShowHostile then
         local colorTable = {0.68, 0.33, 0.38}
 		
@@ -264,7 +264,7 @@ function plugin.HealthBarColor(self)
 	if (plugin.db.profile.units[self.type].SmoothHealth or plugin.db.profile.units[self.type].FadeHealth) then
 		bar:SetAlpha(1)
 	else
-		bar:SetAlpha(.8)
+		bar:SetAlpha(0.8)
 	end
 end
 
@@ -289,7 +289,7 @@ end
 
 function plugin.UpdateHealth(self, skipFade)
 	local currValue, maxValue = UnitHealth(self.unit), UnitHealthMax(self.unit)
-	local perc = currValue/maxValue * 100
+	local perc = currValue / maxValue * 100
 
 	if (not UnitExists(self.unit) or UnitIsDead(self.unit) or UnitIsGhost(self.unit) or not UnitIsConnected(self.unit) or maxValue == 1) then
 		perc = 0
