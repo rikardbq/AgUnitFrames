@@ -1,0 +1,56 @@
+## Interface: 30300
+## Title: ag_UnitFrames
+## Notes: Unit frame addon using Ace3.
+## Notes-ruRU: Модификация рамок игроков/существ использующая Ace3.
+## Notes-zhTW: 基於Ace3的頭像框架插件。
+## Version: r715
+## Author: andreasg
+## X-Credits: Rabbit, Borke, Miles, Ammo
+## SavedVariables: aUF2DB
+## X-Category: UnitFrame
+## OptionalDeps: Ace3, LibSharedMedia-3.0
+## X-Curse-Packaged-Version: r715
+## X-Curse-Project-Name: ag_UnitFrames
+## X-Curse-Project-ID: ag_unitframes
+## X-Curse-Repository-ID: wow/ag_unitframes/mainline
+
+#@no-lib-strip@
+embeds.xml
+#@end-no-lib-strip@
+
+locales\ag_UnitFrames-enUS.lua
+locales\ag_UnitFrames-ruRU.lua
+locales\ag_UnitFrames-koKR.lua
+locales\ag_UnitFrames-zhCN.lua
+# locales\ag_UnitFrames-frFR.lua
+# locales\ag_UnitFrames-esES.lua
+# locales\ag_UnitFrames-deDE.lua
+locales\ag_UnitFrames-zhTW.lua
+
+ag_UnitFrames.lua
+
+layouts\ABF.lua
+
+ag_UnitClass.lua
+ag_GroupClass.lua
+
+modules\aggroborder\aggroborder.lua
+modules\auras\auras.lua
+modules\combattext\combattext.lua
+modules\combaticon\combaticon.lua
+modules\combopoints\combopoints.lua
+modules\healthbar\healthbar.lua
+modules\hideblizz\hideblizz.lua
+modules\highlight\highlight.lua
+modules\leadericon\leadericon.lua
+modules\masterlootericon\masterlootericon.lua
+modules\powerbar\powerbar.lua
+modules\pvpicon\pvpicon.lua
+modules\raidtargeticon\raidtargeticon.lua
+modules\runebar\runebar.lua
+modules\totembar\totembar.lua
+modules\lfgicon\lfgicon.lua
+
+ag_Extras\extras.xml
+
+ag_Options\options.xml

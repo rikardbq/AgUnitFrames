@@ -1,0 +1,38 @@
+<Bindings>
+    <Binding name="Enable Raidset 1" header="ag_UnitFrames">
+       if aUF then aUF:SetRaidset(1) end
+    </Binding>
+    <Binding name="Enable Raidset 2">
+       if aUF then aUF:SetRaidset(2) end
+    </Binding>
+    <Binding name="Enable Raidset 3">
+       if aUF then aUF:SetRaidset(3) end
+    </Binding>
+    <Binding name="Enable Raidset 4">
+       if aUF then aUF:SetRaidset(4) end
+    </Binding>
+    <Binding name="Enable Raidset 5">
+       if aUF then aUF:SetRaidset(5) end
+    </Binding>
+    <Binding name="Enable Raidset 6">
+       if aUF then aUF:SetRaidset(6) end
+    </Binding>
+    <Binding name="Enable Raidset 7">
+       if aUF then aUF:SetRaidset(7) end
+    </Binding>
+    <Binding name="Enable Raidset 8">
+       if aUF then aUF:SetRaidset(8) end
+    </Binding>
+    <Binding name="Enable Raidset 9">
+       if aUF then aUF:SetRaidset(9) end
+    </Binding>
+    <Binding name="Enable Raidset 10">
+       if aUF then aUF:SetRaidset(10) end
+    </Binding>
+    <Binding name="Next Raidset">
+       if aUF then aUF:SetRaidset("next") end
+    </Binding>
+    <Binding name="Previous Raidset">
+       if aUF then aUF:SetRaidset("prev") end
+    </Binding>
+</Bindings>

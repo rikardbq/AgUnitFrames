@@ -1,0 +1,15 @@
+## Interface: 30100
+## Title: ag_Options
+## Notes: Unit frame addon using Ace3.
+## Notes-ruRU: ??????????? ????? ???????/??????? ???????????? Ace3.
+## Version: r715
+## Author: andreasg
+## X-Category: UnitFrame
+## Dependencies: ag_UnitFrames
+## LoadOnDemand: 1
+## X-Curse-Packaged-Version: r715
+## X-Curse-Project-Name: ag_UnitFrames
+## X-Curse-Project-ID: ag_unitframes
+## X-Curse-Repository-ID: wow/ag_unitframes/mainline
+
+options.xml

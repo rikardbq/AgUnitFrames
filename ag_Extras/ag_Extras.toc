@@ -1,0 +1,14 @@
+## Interface: 30100
+## Title: ag_ExtrasDev
+## Notes: Unit frame addon using Ace3.
+## Version: r715
+## Author: andreasg
+## X-Category: UnitFrame
+## Dependencies: ag_UnitFrames
+## OptionalDeps: LibHealComm-3.0, LibQuickHealth-1.0
+## X-Curse-Packaged-Version: r715
+## X-Curse-Project-Name: ag_UnitFrames
+## X-Curse-Project-ID: ag_unitframes
+## X-Curse-Repository-ID: wow/ag_unitframes/mainline
+
+extras.xml

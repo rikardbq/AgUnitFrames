@@ -1,0 +1,14 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<!--@no-lib-strip@-->
+	<Include file="embeds.xml"/>
+	<!--@end-no-lib-strip@-->
+	<Script file="modules\castbar\castbar.lua"/>
+	<Script file="modules\fivesecond\fivesecond.lua"/>
+	<Script file="modules\happiness\happiness.lua"/>
+	<Script file="modules\incomingheals\incoming.lua"/>
+	<Script file="modules\portrait\portrait.lua"/>
+	<Script file="modules\quickhealth\quickhealth.lua"/>
+	<Script file="modules\rangecheck\rangecheck.lua"/>
+	<Script file="modules\xprepbar\xprepbar.lua"/>
+</Ui>
