@@ -917,6 +917,18 @@ function options:PopulateOptions()
                                     arg = "PrimaryStatColorStrength",
                                     order = 4,
                                 },
+                                Reset = {
+                                    name = "Reset Colors",
+                                    type = "execute",
+                                    desc = "Reset primary stat colors to their original values.",
+                                    func = function()
+                                        for k, v in pairs(aUF:GetDefaultPrimaryStatColors()) do
+                                            setColor({ arg = k }, v.r, v.g, v.b, 1)
+                                        end
+                                    end,
+                                    order = 5,
+                                    hidden = false,
+                                }
                             }
                         },
 --[[
