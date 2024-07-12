@@ -190,20 +190,19 @@ local colorTables = {
 
 local function colorGradient(perc)
 	local healthColor = aUF.db.profile.HealthColor
+    local healthColorLow = aUF.db.profile.HealthColorLow
+    local r1, g1, b1 = healthColorLow.r, healthColorLow.g, healthColorLow.b
+    local r2, g2, b2 = healthColor.r, healthColor.g, healthColor.b
+
 	if perc and perc >= 1 then
-		return {healthColor.r, healthColor.g, healthColor.b}
-	elseif (perc and perc <= 0) or not perc then
-		return {colorTables.red[1], colorTables.red[2], colorTables.red[3]}
+		return {r2, g2, b2}
+	elseif (perc and perc <= 0.1) or not perc then
+		return {r1, g1, b1}
 	end
 
-	local _, relperc = math.modf(perc*2)
-	local r1, g1, b1 = colorTables.red[1], colorTables.red[2], colorTables.red[3]
-    local r2, g2, b2 = colorTables.yellow[1], colorTables.yellow[2], colorTables.yellow[3]
-	if perc >= 0.5 then	
-		r1, g1, b1 = colorTables.yellow[1], colorTables.yellow[2], colorTables.yellow[3]
-		r2, g2, b2 = healthColor.r, healthColor.g, healthColor.b
-    end
-	return {r1 + (r2 - r1) * relperc, g1 + (g2 - g1) * relperc, b1 + (b2 - b1) * relperc}
+	local _, relperc = math.modf(perc)
+	
+    return {r1 + (r2 - r1) * relperc, g1 + (g2 - g1) * relperc, b1 + (b2 - b1) * relperc}
 end
 
 function plugin.HealthBarColor(self)
@@ -363,7 +362,7 @@ function plugin.UpdateHealth(self, skipFade)
 	end
 	self.bars.HealthBar:SetValue(perc)
 
-	if db.HealthGradient then
+	if db.GradientHealth then
 		plugin.SetBarColor(self, colorGradient(currValue / maxValue))
 	end
 end
