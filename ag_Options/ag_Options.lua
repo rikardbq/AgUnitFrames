@@ -833,9 +833,9 @@ function options:PopulateOptions()
 							order = 2,
 						},
                         HealthLow = {
-                            name = L["Low Health"],
+                            name = "Low Health",
 							type = "color",
-							desc = L["Sets the low health color."],
+							desc = "Sets the low health color.",
 							arg = "HealthColorLow",
 							order = 2,
                         },
@@ -881,6 +881,44 @@ function options:PopulateOptions()
 							arg = "CastbarColor",
 							order = 8,
 						},
+                        PrimaryStatColors = {
+                            type= "group",
+                            name = "Primary Stat Colors",
+                            get = getColor,
+                            set = setColor,
+                            order = 21,
+                            inline = true,
+                            args = {
+                                PrimaryStatAgility = {
+                                    name = "Agility",
+                                    type = "color",
+                                    desc = "Sets the color for primary stat: agility.",
+                                    arg = "PrimaryStatColorAgility",
+                                    order = 1,
+                                },
+                                PrimaryStatIntellect = {
+                                    name = "Intellect",
+                                    type = "color",
+                                    desc = "Sets the color for primary stat: intellect.",
+                                    arg = "PrimaryStatColorIntellect",
+                                    order = 2,
+                                },
+                                PrimaryStatSpirit = {
+                                    name = "Spirit",
+                                    type = "color",
+                                    desc = "Sets the color for primary stat: spirit.",
+                                    arg = "PrimaryStatColorSpirit",
+                                    order = 3,
+                                },
+                                PrimaryStatStrength = {
+                                    name = "Strength",
+                                    type = "color",
+                                    desc = "Sets the color for primary stat: strength.",
+                                    arg = "PrimaryStatColorStrength",
+                                    order = 4,
+                                },
+                            }
+                        },
 --[[
 						Experience = {
 							type = "color",
