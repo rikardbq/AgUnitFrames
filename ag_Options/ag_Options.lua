@@ -832,6 +832,13 @@ function options:PopulateOptions()
 							arg = "HealthColor",
 							order = 2,
 						},
+                        HealthLow = {
+                            name = L["Low Health"],
+							type = "color",
+							desc = L["Sets the low health color."],
+							arg = "HealthColorLow",
+							order = 2,
+                        },
 						Mana = {
 							name = L["Mana"],
 							type = "color",

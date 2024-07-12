@@ -286,6 +286,14 @@ do
 						arg = -3,
 						get = get,
 					},
+                    GradientHealth = {
+                        name = L["Color By Health Percentage"],
+						type = "toggle",
+						desc = L["Color the healthbar by unit health percentage."],
+						set = optionSet,
+						arg = -3,
+						get = get,
+                    }
 				}
 			}
 			return config
