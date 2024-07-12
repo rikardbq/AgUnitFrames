@@ -182,85 +182,90 @@ end
 -- STATUSBAR COLOR --
 ---------------------
 local colorTables = {
-    tapped = {0.5, 0.5, 0.5},
-    red = {0.9, 0.2, 0.3},
-    yellow = {1, 0.85, 0.1},
-    green = {0.4, 0.95, 0.3}
+    tapped = {r = 0.5, g = 0.5, b = 0.5},
+    red = {r = 0.9, g = 0.2, b = 0.3},
+    yellow = {r = 1, g = 0.85, b = 0.1},
+    green = {r = 0.4, g = 0.95, b = 0.3}
 }
 
-local function colorGradient(perc)
-	local healthColor = aUF.db.profile.HealthColor
-    local healthColorLow = aUF.db.profile.HealthColorLow
-    local r1, g1, b1 = healthColorLow.r, healthColorLow.g, healthColorLow.b
-    local r2, g2, b2 = healthColor.r, healthColor.g, healthColor.b
-
+local function colorGradient(perc, color1, color2)
 	if perc and perc >= 1 then
-		return {r2, g2, b2}
+		return color1
 	elseif (perc and perc <= 0.1) or not perc then
-		return {r1, g1, b1}
+		return color2
 	end
 
 	local _, relperc = math.modf(perc)
 	
-    return {r1 + (r2 - r1) * relperc, g1 + (g2 - g1) * relperc, b1 + (b2 - b1) * relperc}
+    return {
+        r = color2.r + (color1.r - color2.r) * relperc,
+        g = color2.g + (color1.g - color2.g) * relperc,
+        b = color2.b + (color1.b - color2.b) * relperc
+    }
 end
 
 function plugin.HealthBarColor(self)
-	local bar = self.bars.HealthBar
-    local healthColor = aUF.db.profile.HealthColor
-	local _, class = UnitClass(self.unit)
     local db = plugin.db.profile.units[self.type]
+	local bar = self.bars.HealthBar
+    local color = aUF.db.profile.HealthColor
+	local _, class = UnitClass(self.unit)
     local petHappiness = GetPetHappiness()
 
 	if UnitIsTapped(self.unit) and not UnitIsTappedByPlayer(self.unit) then
-        plugin.SetBarColor(self, colorTables.tapped)
+        color = colorTables.tapped
 	elseif db.AggroHealth and self.aggro then
-        plugin.SetBarColor(self, colorTables.red)
+        color = colorTables.red
 	elseif (self.unit == "pet" and petHappiness) then
-        local colorTable = colorTables.green
+        color = colorTables.green
 		if (petHappiness == 1) then
-			colorTable = colorTables.red
+			color = colorTables.red
 		elseif (petHappiness == 2) then
-			colorTable = colorTables.yellow
+			color = colorTables.yellow
         end
-
-        plugin.SetBarColor(self, colorTable)
 	elseif not UnitIsFriend(self.unit, "player") and db.TargetShowHostile then
-        local colorTable = {0.68, 0.33, 0.38}
+        color = {r = 0.68, g = 0.33, b = 0.38}
 		
         if (UnitPlayerControlled(self.unit)) then
             if UnitCanAttack("player", self.unit) then
-				colorTable = colorTables.red
+				color = colorTables.red
 			end
 		else
 			local reaction = UnitReaction(self.unit, "player")
 			
             if (reaction) then
 				if reaction == 5 or reaction == 6 or reaction == 7 then
-					colorTable = colorTables.green
+					color = colorTables.green
 				elseif reaction == 4 then
-					colorTable = colorTables.yellow
+					color = colorTables.yellow
 				elseif reaction == 1 or reaction == 2 or reaction == 3 then
-					colorTable = colorTables.red
+					color = colorTables.red
 				else
                     -- possible bug?
 					return UnitReactionColor[reaction]
 				end
 			end
 		end
-
-        plugin.SetBarColor(self, colorTable)
 	elseif (db.ClassColorBars and UnitIsPlayer(self.unit) and class and RAID_CLASS_COLORS[class]) then
-		local raidColor = RAID_CLASS_COLORS[class]
-        
-        plugin.SetBarColor(self, {raidColor.r, raidColor.g, raidColor.b})
-    elseif db.GradientHealth then
-		local currValue, maxValue = UnitHealth(self.unit), UnitHealthMax(self.unit)
-		plugin.SetBarColor(self, colorGradient(currValue / maxValue))
-	else
-        plugin.SetBarColor(self, {healthColor.r, healthColor.g, healthColor.b})
+		color = RAID_CLASS_COLORS[class]
+    elseif db.PrimaryStatColorBars then
+        local primaryStatColors = {
+            aUF.db.profile.PrimaryStatColorStrength,
+            aUF.db.profile.PrimaryStatColorAgility,
+            aUF.db.profile.PrimaryStatColorIntellect,
+            aUF.db.profile.PrimaryStatColorSpirit,
+        }
+        color = primaryStatColors[GetUnitPrimaryStat(self.unit)]
     end
-	if (plugin.db.profile.units[self.type].SmoothHealth or plugin.db.profile.units[self.type].FadeHealth) then
+    
+    if db.GradientHealth then
+		local currValue, maxValue = UnitHealth(self.unit), UnitHealthMax(self.unit)
+        local colorLow = aUF.db.profile.HealthColorLow
+        color = colorGradient(currValue / maxValue, color, colorLow)
+    end
+    
+    plugin.SetBarColor(self, color)
+	
+    if (db.SmoothHealth or db.FadeHealth) then
 		bar:SetAlpha(1)
 	else
 		bar:SetAlpha(0.8)
@@ -271,7 +276,7 @@ function plugin.SetBarColor(self, colorTable)
 	local bar = self.bars.HealthBar
 	local bg = self.bars.HealthBar.bg
 	local fade = self.healthFade
-    local r, g, b = colorTable[1], colorTable[2], colorTable[3]
+    local r, g, b = colorTable.r, colorTable.g, colorTable.b
 	
 	if(r and g and b) then
 		bar:SetStatusBarColor(r, g, b)
@@ -363,6 +368,6 @@ function plugin.UpdateHealth(self, skipFade)
 	self.bars.HealthBar:SetValue(perc)
 
 	if db.GradientHealth then
-		plugin.SetBarColor(self, colorGradient(currValue / maxValue))
+        plugin.HealthBarColor(self)
 	end
 end

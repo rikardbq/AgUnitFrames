@@ -1108,6 +1108,15 @@ function aUF:GetRaidColors(class)
 	end
 end
 
+function aUF:GetDefaultPrimaryStatColors()
+    return {
+        PrimaryStatColorAgility = aUF.defaultVars.profile.PrimaryStatColorAgility,
+        PrimaryStatColorIntellect = aUF.defaultVars.profile.PrimaryStatColorIntellect,
+        PrimaryStatColorSpirit = aUF.defaultVars.profile.PrimaryStatColorSpirit,
+        PrimaryStatColorStrength = aUF.defaultVars.profile.PrimaryStatColorStrength
+    }
+end
+
 local new, del
 do
 	local cache = setmetatable({},{__mode="k"})
@@ -1237,7 +1246,6 @@ aUF.defaultVars = {
 		CurrentRaidSet = "1",
 		HidePartyInRaid = true,
 		FiveMan = true,
-		
 		CastbarColor = {
 			r = 1.0,
 			g = 0.7,
@@ -1248,14 +1256,39 @@ aUF.defaultVars = {
 			g = 0.95,
 			b = 0.3,
 		},
+        HealthColorLow = {
+            r = 0.9,
+            g = 0.2,
+            b = 0.3
+        },
+        PrimaryStatColorAgility = {
+            r = 1,
+            g = 0.96,
+            b = 0.41
+        },
+        PrimaryStatColorIntellect = {
+            r = 0.25,
+            g = 0.78,
+            b = 0.92
+        },
+        PrimaryStatColorSpirit = {
+            r = 1,
+            g = 1,
+            b = 1
+        },
+        PrimaryStatColorStrength = {
+            r = 0.78,
+            g = 0.61,
+            b = 0.43
+        },
 		ManaColor = {
-			[0] = { r = 0.3, g = 0.5, b = 0.85},
-			[1] = { r = 0.9, g = 0.2, b = 0.3},
-			[2] = { r = 1, g = 0.85, b = 0},
-			[3] = { r = 1, g = 0.85, b = 0.1},
-			[4] = { r = 0, g = 1, b = 1},
-			[5] = { r = 0.5, g = 0.5, b = 0.5 },
-			[6] = { b = 0.6, g = 0.45, r = 0.35},
+			[0] = {r = 0.3, g = 0.5, b = 0.85},
+			[1] = {r = 0.9, g = 0.2, b = 0.3},
+			[2] = {r = 1, g = 0.85, b = 0},
+			[3] = {r = 1, g = 0.85, b = 0.1},
+			[4] = {r = 0, g = 1, b = 1},
+			[5] = {r = 0.5, g = 0.5, b = 0.5 },
+			[6] = {b = 0.6, g = 0.45, r = 0.35},
 		},
 		TapDeadColor = {
 			r = 0.5,
